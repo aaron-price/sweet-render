@@ -1,0 +1,32 @@
+{
+  "name": "sweet-render",
+  "version": "1.0.0",
+  "description": "A lightweight, customizable, syntactic sugar template engine",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha ./tests",
+    "test:watch": "test --watch",
+    "validate": "npm-run-all --parallel lint && test"
+  },
+  "keywords": [
+    "template",
+    "engine",
+    "javascript"
+  ],
+  "author": "Aaron Price",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "6.24.0",
+    "babel-preset-env": "1.2.1"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "ghooks": "1.3.2",
+    "mocha": "3.2.0",
+    "npm-run-all": "2.3.0"
+  },
+  "config": {
+    "pre-commit": "npm run validate"
+  }
+}
