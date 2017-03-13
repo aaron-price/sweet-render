@@ -33,6 +33,12 @@ function sweet_render(input) {
         }
     }
 
+    /*
+    buildContainer(".container");
+    buildContainer(".container", 3);
+    buildContainer("#container");
+    */
+
     // Declare some variables
     var config = Object.assign({}, default_config, custom_config);
     var unformattedInputArray = input.split(/\n/ig);
@@ -50,21 +56,21 @@ function sweet_render(input) {
 
     // Determine the parent of each line (necessary for nesting elements)
     for (var lineNum = 0; lineNum < elementsArray.length; lineNum += 1) {
+        var findParentElement = function findParentElement(lineNum, currentLine) {
+            for (var i = lineNum - 1; i > 0; i -= 1) {
+                if (elementsArray[i].indents < currentLine.indents) {
+                    currentLine.parent = elementsArray[i].element;
+                    break;
+                }
+            }
+        };
+
         var currentLine = elementsArray[lineNum];
 
         // Determine the parent line of the current one.
-        currentLine.indents > 0 ? findParentElement(lineNum, currentLine, elementsArray) : currentLine.parent = containerParent;
+        currentLine.indents > 0 ? findParentElement(lineNum, currentLine) : currentLine.parent = containerParent;
 
         currentLine.parent.insertBefore(currentLine.element, null);
-    }
-}
-
-function findParentElement(lineNum, currentLine, elementsArray) {
-    for (var i = lineNum - 1; i > 0; i -= 1) {
-        if (elementsArray[i].indents < currentLine.indents) {
-            currentLine.parent = elementsArray[i].element;
-            break;
-        }
     }
 }
 

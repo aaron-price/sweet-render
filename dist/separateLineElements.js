@@ -51,9 +51,11 @@ function getContentStartIndex(attributesString, str, config) {
 function getAttributesArray(str, attributes_separator) {
     var arr = [];
     var keysAndValues = str.split(attributes_separator);
+
     keysAndValues.forEach(function (s) {
         var keyOrValue = s.split("=");
         var attributeObject = {};
+        console.log(keyOrValue);
         attributeObject.property = keyOrValue[0];
         attributeObject.value = keyOrValue[1].slice(1, -1);
 
@@ -68,9 +70,7 @@ function nthIndex(str, tag, n) {
 
     while (n-- && i++ < ln) {
         i = str.indexOf(tag, i);
-        if (i < 0) {
-            break;
-        }
+        if (i < 0) break;
     }
     return i;
 }

@@ -22,12 +22,6 @@ function sweet_render(input, custom_config = {}) {
         }
     }
 
-    /*
-    buildContainer(".container");
-    buildContainer(".container", 3);
-    buildContainer("#container");
-    */
-
     // Declare some variables
     const config = Object.assign({}, default_config, custom_config);
     let unformattedInputArray = input.split(/\n/ig);

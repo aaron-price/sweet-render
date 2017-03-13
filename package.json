@@ -4,12 +4,12 @@
   "description": "A lightweight, customizable, syntactic sugar template engine",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "rimraf src",
-    "build": "babel --out-dir dist --ignore *.test.js src",
+    "prebuild": "rimraf dist",
+    "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
     "lint": "eslint .",
     "test": "mocha ./tests",
     "test:watch": "mocha --watch",
-    "validate": "npm-run-all --parallel lint && test"
+    "validate": "npm-run-all --parallel lint test build"
   },
   "keywords": [
     "template engine",
