@@ -1,4 +1,4 @@
-import blockFormat from "./lib/blockFormat";
+import blockFormat from "./blockFormat";
 
 function sweet_render(input, custom_config = {}) {
     // Get a config object with default values unless overridden by custom values.
@@ -14,13 +14,19 @@ function sweet_render(input, custom_config = {}) {
         const n = typeof value === "string" ? 0 : value[1];
 
 
-        if (str.split("")[0] === ".") {
+        if(str.split("")[0] === "."){
             return document.getElementsByClassName(str.slice(1))[n];
         }
-        if (str.split("")[0] === "#") {
+        if(str.split("")[0] === "#"){
             return document.getElementById(str.slice(1));
         }
     }
+
+    /*
+    buildContainer(".container");
+    buildContainer(".container", 3);
+    buildContainer("#container");
+    */
 
     // Declare some variables
     const config = Object.assign({}, default_config, custom_config);
@@ -34,7 +40,7 @@ function sweet_render(input, custom_config = {}) {
 
     // Individually format each line of the text block, and add to elementsArray.
     unformattedInputArray.forEach((line) => {
-        elementsArray.push(blockFormat(line, config));
+        elementsArray.push(blockFormat(line, config))
     });
 
     // Determine the parent of each line (necessary for nesting elements)
@@ -42,22 +48,20 @@ function sweet_render(input, custom_config = {}) {
         let currentLine = elementsArray[lineNum];
 
         // Determine the parent line of the current one.
-        currentLine.indents > 0 ?
-            findParentElement(lineNum, currentLine, elementsArray) :
-            currentLine.parent = containerParent;
+        currentLine.indents > 0 ? findParentElement(lineNum, currentLine) : currentLine.parent = containerParent;
+
+        function findParentElement(lineNum, currentLine) {
+            for (let i = lineNum - 1; i > 0; i -= 1) {
+                if (elementsArray[i].indents < currentLine.indents) {
+                    currentLine.parent = elementsArray[i].element;
+                    break;
+                }
+            }
+        }
 
         currentLine.parent.insertBefore(currentLine.element, null);
     }
 
-}
-
-function findParentElement(lineNum, currentLine, elementsArray) {
-    for (let i = lineNum - 1; i > 0; i -= 1) {
-        if (elementsArray[i].indents < currentLine.indents) {
-            currentLine.parent = elementsArray[i].element;
-            break;
-        }
-    }
 }
 
 export default sweet_render;

@@ -2,29 +2,38 @@
   "name": "sweet-render",
   "version": "1.0.0",
   "description": "A lightweight, customizable, syntactic sugar template engine",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "prebuild": "rimraf src",
+    "build": "babel --out-dir dist --ignore *.test.js src",
     "lint": "eslint .",
     "test": "mocha ./tests",
-    "test:watch": "test --watch",
+    "test:watch": "mocha --watch",
     "validate": "npm-run-all --parallel lint && test"
   },
   "keywords": [
-    "template",
-    "engine",
+    "template engine",
     "javascript"
   ],
   "author": "Aaron Price",
   "license": "MIT",
   "dependencies": {
     "babel-core": "6.24.0",
-    "babel-preset-env": "1.2.1"
+    "babel-preset-env": "1.2.1",
+    "babel-preset-es2015": "6.9.0"
   },
   "devDependencies": {
+    "babel-cli": "6.24.0",
     "chai": "3.5.0",
     "ghooks": "1.3.2",
     "mocha": "3.2.0",
-    "npm-run-all": "2.3.0"
+    "npm-run-all": "2.3.0",
+    "rimraf": "2.6.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "config": {
     "pre-commit": "npm run validate"

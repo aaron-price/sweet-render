@@ -22,7 +22,7 @@ function blockFormat(value, config) {
     let newElement = document.createElement(line.elementType);
 
     line.attributes.forEach((attr) => {
-        newElement.setAttribute(attr.property, attr.value);
+        newElement.setAttribute(attr.property, attr.value)
     });
 
     let newContent = document.createTextNode(line.content);
@@ -30,8 +30,11 @@ function blockFormat(value, config) {
 
     return {
         element: newElement,
-        indents: indents,
+        indents: indents
     };
 }
+
+
+
 
 export default blockFormat;
