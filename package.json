@@ -6,9 +6,11 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
-    "lint": "eslint .",
-    "test": "mocha ./tests",
+    "lint": "eslint src",
+    "pretest": "rimraf tests/build",
+    "test": "npm run build && babel --copy-files --out-dir tests/build tests && nyc mocha ./tests/build/specs",
     "test:watch": "mocha --watch",
+    "phantom": "phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js tests/build/index.test.js",
     "validate": "npm-run-all --parallel lint test build"
   },
   "keywords": [
@@ -27,9 +29,18 @@
     "chai": "3.5.0",
     "ghooks": "1.3.2",
     "mocha": "3.2.0",
+    "mocha-phantomjs-core": "2.1.1",
     "npm-run-all": "2.3.0",
+    "nyc": "10.1.2",
     "rimraf": "2.6.1"
   },
+    "nyc": {
+      "check-coverage": true,
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+    },
   "babel": {
     "presets": [
       "es2015"

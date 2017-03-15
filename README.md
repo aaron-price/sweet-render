@@ -1,10 +1,11 @@
 # Sweet Render
-#### A lightweight, customizable, syntactic sugar template engine.
+#### A build-your-own-template-engine
 Add it anywhere in your javascript to render html DOM elements.
+Use the default, or the powerful customization API.
 
 ## Set up:
 index.html
-```
+```HTML
 <html>
     <head>
         <script src="index.js" type="text/javascript"/>
@@ -16,150 +17,243 @@ index.html
 ```
 
 index.js
-```
+```Javascript
 import sweet_render from "sweet-render";
+let some_variable = "aaroncoding";
 
 const input = `
-@h3@ Hello world
+<h3> Hello World!
+<ul>
+  <li>
+    <a href="http://${some_variable}.com"> Click me!
+<p> Wasn't that easy?
 `
 
 sweet_render(input);
 ```
 
 converts into:
-```
+```HTML
 <h3>Hello world</h3>
+<ul>
+  <li>
+    <a href="http://aaroncoding.com">Click Me</a>
+  </li>
+</ul>
+<p> Wasn't that easy?</p>
 ```
 
 Renders to your page as:
 ### Hello world
+* [Click me](http://aaroncoding.com)
+
+Wasn't that easy?
 
 ## Syntax
+> sweet_render(input[, config])
+
 Use the es6 template literal (backtick) to create a multiline string, and pass it as an argument to the sweet_render function.
 
-Start each line with any html tag wrapped in @s
-If there is no tag, it defaults to @span@. Note that if you want to start the span content with a space, you'll need to explicitly declare @span@ otherwise it'll conflict with the indentation
+Start each line with any html tag wrapped in an opening and closing element tag. By default that's "<" and ">"
+If there is no tag, it defaults to <span>. Note that if you want to start the span content with a space, or add attributes to it, you'll need to explicitly declare <span> otherwise it'll conflict with the indentation
 
-To add attributes, wrap all of them in a single pair of !s
+To add attributes, wrap all of them in the tag as well (by default).
 Separate multiple attributes with spaces
 
 Spaces after a closing element or closing attribute tag are optional.
 
-To nest elements, indent them with 2 spaces.
+To nest elements, indent them with 2 spaces (by default).
 
 To interpolate or concatenate javascript, do it just like you would with any other template literal string.
 
-Example:
-```
-@div@ ! height="${some_variable}px", width="300px", style="text-align: center" !
-  @p@ In the middle
-    @a@ ! href="http://aaroncoding.com" ! click me!
-    I'm a span in a paragraph
-  @ul@
-    @li@ first list item
-    @li@ second list item
-
-```
-
 ## Configuration
-@s aren't good enough for you? No problem, you can make your own templating engine! Just pass it a config parameter and override some of the defaults.
+"<"s aren't good enough for you? No problem, you can make your own templating engine! Just pass it an object as the second argument, and override some of the defaults.
 
-```
+There's actually a lot more than meets the eye. 
+
+The element tag (wrapping "div" or "ul") can have an opening tag and a different closing tag depending on whether the element takes attributes
+
+So you can have element and attribute segments joined (default) or totally separate by overriding the defaults like this:
+
+```Javascript
 import sweet_render from "sweet-render";
 
 const config = {
-    element_tag: "<$>",
-    attributes_tag: "ATTR"
+    tags: {
+        element: {
+            open: "[[",
+            closeWithAttr: "]]",
+            closeWithoutAttr: "]]"
+        },
+        attribute: {
+            open: "{",
+            close: "}",
+        },
+    }
 }
 
 const input = `
-<$>ul<$>
-  <$>li<$> first list item
-  <$>li<$>
-    <$>a<$> ATTR href="http://aaroncoding.com" ATTR click me!
+[[ul]
+  [[li]] first list item
+  [[li]]
+    [[a]] {href="http://aaroncoding.com"} click me!
 `
 
 sweet_render(input, config);
 
 ```
+A tag can be any string. It can be identical or different from any other string. By composing them in different ways, there is room for tremendous creativity.
 
-You can override any of these defaults in the same manner:
+You can override any of these defaults:
 ```
 container: ".container",
-element_tag: "@",
-attributes_tag: "!",
+tags: {
+    element: {
+        open: "<",
+        closeWithAttr: " ",
+        closeWithoutAttr: ">",
+    },
+    attribute: {
+        open: "",
+        close: ">",
+    },
+},
 attributes_separator: ", ",
-indent_str: "  ",
+indent_str: "  "
 ```
 ### Config details
 #### container
 **Default**: ".container" (the first element with class "container")
 **Type**: string OR array
 **Default example**
+```Javascript
 <div></div>
 <div class="container">This is the container</div>
 <div></div>
-
+```
 **Customized example** 
 const config = {container: [".foo", 3]}
-
+```Javascript
 <div class="foo"></div>
 <div class="foo"></div>
 <div class="foo"></div>
 <div class="foo">This is the container</div>
 <div class="foo"></div>
+```
+**Description** 
+The target element in which to render your input.
 
-**Description** The target element in which to render your input.
 **Usage**
 Start with either "." for class, "#" for id. 
 If you use a class but don't want to target the first of it's kind, pass an array instead of a string, with the string as the first element and the nth number as the second.
 If you pass a class as a string, the nth instance parameter will default to 0.
 
-#### element_tag
-**Default**: "@"
+#### tags.element.open
+**Default**: 
+open: "<"
+closeWithAttr: " "
+closeWithoutAttr: ">"
+
 **Type**: string
 **Default Example**
-@a@ !href="www.aaroncoding.com", class="batman"!
-**Customized Example**
-const config = {element_tag: "$$"}
+```
+<a href="www.aaroncoding.com", class="batman"> href and class are attributes
+<p> This paragraph has no attributes
+```
 
-$$a$$ !href="www.aaroncoding.com", class="batman"!
-**Description**: Contains the element type. Can be any string, any length... except spaces.
+**Customized Example**
+```Javascript
+const config = {
+    tags: {
+        element: {
+            open: "$$",
+            closeWithoutAttr: "$$"
+        }
+    }
+}
+
+const input = `
+$$a href="www.aaroncoding.com", class="batman"> href and class are attributes
+$$p$$ This paragraph has no attributes
+`
+```
+**Description**: 
+Contains the element type. Can be almost any string, any length.
+**Known issues**: 
+Don't open with spaces if you also indent with spaces.
 
 #### attributes_tag
-**Default**: "!"
+**Default**:
+open: ""
+close: ">"
+
 **Type**: string
 **Default Example**
-@a@ !href="www.aaroncoding.com", class="batman"!
+```
+<a !href="www.aaroncoding.com", class="batman"> Click me
+```
 **Customized Example**
-const config = {attributes_tag: "$$"}
+```Javascript
+const config = {
+    tags: {
+        element: {
+            open: "$$",
+            closeWithoutAttr: "$$",
+            closeWithAttr: "!"
+        }
+        attribute: {
+            open: "{",
+            close: "}"
+        }
+    }
+}
 
-@a@ $$href="www.aaroncoding.com", class="batman"$$
-**Description**: Contains the attribute(s). Can be any string, any length... except spaces.
+const input = `
+$$a! {href="www.aaroncoding.com", class="batman"} href and class are attributes
+$$p$$ This paragraph has no attributes
+`
+```
+**Description**: 
+Contains the attribute(s). Can be almost any string, any length.
+sweet_render will start looking for the attribute open tag as soon as it sees the element close.
 
 #### attributes_separator
-**Default**: ", " (Note the space after the comma)
+**Default**: 
+", " (Note the space after the comma)
 **Type**: string
-**Default Example** 
-!style="margin: auto", class="foo", href="www.aaroncoding.com"!
+**Default Example**
+```
+<div style="margin: auto", class="foo", href="www.aaroncoding.com">
+```
 **Customized Example**
+```Javascript
 const config = {attributes_separator: " BAM "}
 
-!style="margin: auto" BAM class="foo" BAM href="www.aaroncoding.com"!
-
-**Description**: When you have multiple attributes in an element, this is how you need to separate them. A single space *can* work, but you will need to be careful with spaces within a given attribute.
+<div style="margin: auto" BAM class="foo" BAM href="www.aaroncoding.com">
+```
+**Description**: 
+When you have multiple attributes in an element, this is how you need to separate them. 
+**Known issues**
+A single space *can* work, but you will need to be careful with spaces within a given attribute. For example inline styles with spaces
 
 
 #### indent_str
-**Default**: "  " (That's two spaces)
+**Default**: 
+"  " (That's two spaces)
 **Type**: string
 **Default example**:
-@div@
-  @p@
-**Customized example** 
+```
+<div>
+  <p> Hello
+```
+**Customized example**
+```
 const config = {indent_str: "--"}
 
-@div@
---@p@
-**Description**: The string that counts as an indent. Can be a different number of spaces, or something else entirely
+<div>
+--<p> Hello
+```
+**Description**: 
+The string that counts as an indent. 
+Can be a different number of spaces, or different string entirely
 

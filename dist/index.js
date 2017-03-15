@@ -8,70 +8,36 @@ var _blockFormat = require("./blockFormat");
 
 var _blockFormat2 = _interopRequireDefault(_blockFormat);
 
+var _handleConfig = require("./handleConfig");
+
+var _handleConfig2 = _interopRequireDefault(_handleConfig);
+
+var _handleRendering = require("./handleRendering");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function sweet_render(input) {
     var custom_config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    // Get a config object with default values unless overridden by custom values.
-    var default_config = {
-        element_tag: "@",
-        attributes_tag: "!",
-        attributes_separator: ", ",
-        indent_str: "  ",
-        container: ".container"
-    };
-    function buildContainer(value) {
-        var str = typeof value === "string" ? value : value[0];
-        var n = typeof value === "string" ? 0 : value[1];
-
-        if (str.split("")[0] === ".") {
-            return document.getElementsByClassName(str.slice(1))[n];
-        }
-        if (str.split("")[0] === "#") {
-            return document.getElementById(str.slice(1));
-        }
-    }
-
-    /*
-    buildContainer(".container");
-    buildContainer(".container", 3);
-    buildContainer("#container");
-    */
-
     // Declare some variables
-    var config = Object.assign({}, default_config, custom_config);
-    var unformattedInputArray = input.split(/\n/ig);
+    var config = (0, _handleConfig2.default)(custom_config);
+    var arrOfLines = input.split(/\n/ig);
 
-    var containerParent = buildContainer(config.container);
+    // Build a container DOM node
+    var containerParent = (0, _handleRendering.buildContainer)(config.container);
     var container = document.createElement("span");
     containerParent.appendChild(container);
 
+    // This will hold all other DOM nodes once they're built.
     var elementsArray = [];
 
     // Individually format each line of the text block, and add to elementsArray.
-    unformattedInputArray.forEach(function (line) {
+    arrOfLines.forEach(function (line) {
         elementsArray.push((0, _blockFormat2.default)(line, config));
     });
 
-    // Determine the parent of each line (necessary for nesting elements)
-    for (var lineNum = 0; lineNum < elementsArray.length; lineNum += 1) {
-        var findParentElement = function findParentElement(lineNum, currentLine) {
-            for (var i = lineNum - 1; i > 0; i -= 1) {
-                if (elementsArray[i].indents < currentLine.indents) {
-                    currentLine.parent = elementsArray[i].element;
-                    break;
-                }
-            }
-        };
-
-        var currentLine = elementsArray[lineNum];
-
-        // Determine the parent line of the current one.
-        currentLine.indents > 0 ? findParentElement(lineNum, currentLine) : currentLine.parent = containerParent;
-
-        currentLine.parent.insertBefore(currentLine.element, null);
-    }
+    // Now that the elementsArray is full of DOM node objects, render them.
+    (0, _handleRendering.renderAll)(elementsArray, containerParent);
 }
 
 exports.default = sweet_render;

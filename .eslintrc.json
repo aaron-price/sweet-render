@@ -43,6 +43,7 @@
         "keyword-spacing": 2,
         "comma-dangle": [2, "always-multiline"],
         "no-console": 0
-    }
+    },
+    "ignore": ["./src/lineHandlers.js"]
 }
 
