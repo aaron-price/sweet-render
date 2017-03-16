@@ -57,7 +57,7 @@ Renders to your page as:
 Wasn't that easy?
 
 ## Set up:
-### Browser based environment
+## Browser based environment
 
 In your html:
  1. Grab the library from a CDN
@@ -77,7 +77,7 @@ index.html
 </html>
 ```
 
-In your script, pass the sweetRender function an input string using a multiline template literal 
+In your script, pass the sweetRender.sweetRender() function an input string using a multiline template literal 
 index.js
 ```Javascript
 let some_variable = "aaroncoding";
@@ -88,9 +88,9 @@ const input = `
   <li>
     <a href="http://${some_variable}.com"> Click me!
 <p> Wasn't that easy?
-`
+`;
 
-sweetRender(input);
+sweetRender.sweetRender(input);
 ```
 
 It automatically converts into:
@@ -157,7 +157,7 @@ The element tag (whatever wraps around "div", "ul", etc.) can have an opening ta
 So you can have element and attribute segments joined (default) or totally separate by overriding the defaults like this:
 
 ```Javascript
-import sweetRender from "sweet-render";
+import { sweetRender } from "sweet-render";
 
 const config = {
     tags: {
@@ -332,7 +332,7 @@ $$p$$ This paragraph has no attributes
 Contains the attribute(s). Can be almost any string, any length.
 sweetRender will start looking for the attribute open tag as soon as it sees the element close.
 
-### attributes_separator
+## attributes_separator
 
 **Default**: 
 ```
@@ -367,7 +367,7 @@ When you have multiple attributes in an element, this is how you need to separat
 A single space *can* work, but you will need to be careful with spaces within a given attribute. For example inline styles with spaces
 
 
-### indent_str
+## indent_str
 
 **Default**: 
 ```
