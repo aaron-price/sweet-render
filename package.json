@@ -13,6 +13,7 @@
     "pretest": "rimraf tests/build",
     "test": "NODE_ENV=test babel --copy-files --out-dir tests/build tests && nyc mocha ./tests/build/specs",
     "test:watch": "mocha --watch",
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
     "validate": "npm-run-all --parallel lint test build"
   },
   "keywords": [
@@ -35,6 +36,7 @@
     "babel-plugin-istanbul": "4.0.0",
     "babel-register": "6.24.0",
     "chai": "3.5.0",
+    "codecov": "2.0.1",
     "eslint": "3.17.1",
     "ghooks": "1.3.2",
     "json-loader": "0.5.4",
