@@ -13,12 +13,12 @@
     		//var sweetRender = require("sweet-render");
         const foo = "BAR"
         console.dir(sweetRender);
-        const input = `
-<p> A guy walks into a ${foo}
-<ul>
-  <li> and said ouch
-    <a href="google.com"> click me
-`
+        const input = ""+
+"<p> A guy walks into a ${foo}\n"+
+"<ul>\n"+
+"  <li> and said ouch\n"+
+"    <a href=\"google.com\"> click me\n"+
+""
         sweetRender.sweetRender(input);
     </script>
 </body>

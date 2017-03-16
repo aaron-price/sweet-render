@@ -3,8 +3,7 @@
 Add it anywhere in your javascript to render html DOM elements.
 Use the default, or the powerful customization API.
 
-## Set up:
-### Node based environment
+## Set up: Node based environment
 
 ```BASH
 npm install --save sweet-render
@@ -49,15 +48,14 @@ It automatically converts into:
 <p> Wasn't that easy?</p>
 ```
 
-Renders to your page as:
+Which renders to your page as:
 
 ### Hello world
 * [Click me](http://aaroncoding.com)
 
 Wasn't that easy?
 
-## Set up:
-## Browser based environment
+## Set up: Browser based environment
 
 In your html:
  1. Grab the library from a CDN
@@ -104,7 +102,7 @@ It automatically converts into:
 <p> Wasn't that easy?</p>
 ```
 
-Renders to your page as:
+Which renders to your page as:
 
 ### Hello world
 * [Click me](http://aaroncoding.com)
@@ -120,16 +118,21 @@ Use the template literal (backtick) to create a multiline string.
 
 ```Javascript
 const input = `
-<p> Hello world
+<ul>
+  <li> Nested list item
+    <a href="aaroncoding.com"> click me
 `
 ```
 
 ### pre-es6
-In older setups, concatenate multiple strings together.
+In older setups, concatenate multiple strings together, and end each line with \n
 
 ```Javascript
+var some_url = "aaroncoding";
 var input = "" +
-"<p> Hello world" +
+"<ul>\n"+
+"  <li> Nested list item\n"+
+"    <a href=\"aaroncoding.com\"> click me\n"+
 "";
 ```
 
