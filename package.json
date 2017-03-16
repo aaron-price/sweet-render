@@ -1,7 +1,7 @@
 {
   "name": "sweet-render",
   "version": "1.0.0",
-  "description": "A build-your-own-template-engine sandbox",
+  "description": "A build-your-own-templating-engine sandbox",
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist",

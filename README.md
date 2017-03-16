@@ -1,5 +1,5 @@
 # Sweet Render
-#### A build-your-own-template-engine
+#### A build-your-own-templating-engine sandbox
 Add it anywhere in your javascript to render html DOM elements.
 Use the default, or the powerful customization API.
 
