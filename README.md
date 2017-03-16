@@ -252,8 +252,10 @@ sweet_render will start looking for the attribute open tag as soon as it sees th
 ### attributes_separator
 
 **Default**: 
-
-", " (Single space after a comma)
+```
+", "
+```
+(Single space after a comma)
 
 **Type**:
 
@@ -285,8 +287,10 @@ A single space *can* work, but you will need to be careful with spaces within a 
 ### indent_str
 
 **Default**: 
-
-"  " (Two spaces)
+```
+"  "
+``` 
+(Two spaces)
 
 **Type**: string
 
