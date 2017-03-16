@@ -8,6 +8,7 @@ build
 public/bundle.js
 public/index.css
 server.bundle.js
+dist
 
 
 # misc
@@ -22,7 +23,9 @@ node_modules
 coverage
 
 # production
-build
+.nyc_output
+coverage
+.idea/
 
 # misc
 .DS_Store

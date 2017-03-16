@@ -1,5 +1,5 @@
 import { expect} from "chai";
-import handleConfig from "../../../dist/handleConfig";
+import handleConfig from "../../../src/handleConfig";
 const configDefault = {
     tags: {
         element: {

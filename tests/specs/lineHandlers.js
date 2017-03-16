@@ -4,7 +4,7 @@ import separateLineElements, {
     getAttributesString,
     getContentString,
     getAttributesArray
-} from "../../../dist/lineHandlers";
+} from "../../../src/lineHandlers";
 
 let config1 = {
     tags: {

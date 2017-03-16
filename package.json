@@ -1,21 +1,26 @@
 {
   "name": "sweet-render",
   "version": "1.0.0",
-  "description": "A lightweight, customizable, syntactic sugar template engine",
-  "main": "src/index.js",
+  "description": "A build-your-own-template-engine sandbox",
+  "main": "dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "babel --copy-files --out-dir dist --ignore *.test.js src",
+      "build": "npm-run-all --parallel build:*",
+    "build:main": "babel --copy-files --out-dir dist --ignore *.test.js src",
+      "build:umd": "webpack --output-filename index.umd.js",
+      "build:umd.min": "webpack --output-filename index.umd.min.js -p",
     "lint": "eslint src",
     "pretest": "rimraf tests/build",
-    "test": "npm run build && babel --copy-files --out-dir tests/build tests && nyc mocha ./tests/build/specs",
+    "test": "NODE_ENV=test babel --copy-files --out-dir tests/build tests && nyc mocha ./tests/build/specs",
     "test:watch": "mocha --watch",
-    "phantom": "phantomjs ./node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js tests/build/index.test.js",
     "validate": "npm-run-all --parallel lint test build"
   },
   "keywords": [
     "template engine",
     "javascript"
+  ],
+  "files": [
+    "dist"
   ],
   "author": "Aaron Price",
   "license": "MIT",
@@ -26,25 +31,45 @@
   },
   "devDependencies": {
     "babel-cli": "6.24.0",
+    "babel-loader": "6.4.0",
+    "babel-plugin-istanbul": "4.0.0",
+    "babel-register": "6.24.0",
     "chai": "3.5.0",
     "ghooks": "1.3.2",
+    "json-loader": "0.5.4",
     "mocha": "3.2.0",
     "mocha-phantomjs-core": "2.1.1",
     "npm-run-all": "2.3.0",
     "nyc": "10.1.2",
-    "rimraf": "2.6.1"
+    "rimraf": "2.6.1",
+    "webpack": "2.2.1"
   },
   "nyc": {
     "check-coverage": true,
     "branches": 80,
     "functions": 80,
     "lines": 80,
-    "statements": 80
+    "statements": 80,
+    "instrument": false,
+    "sourceMap": false,
+    "require": [
+      "babel-register"
+    ],
+    "include": [
+      "src"
+    ]
   },
   "babel": {
     "presets": [
       "es2015"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
   },
   "config": {
     "ghooks": {

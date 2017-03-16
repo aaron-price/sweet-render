@@ -1,5 +1,5 @@
 import { expect} from "chai";
-import tagDetection from "../../../dist/tagDetection";
+import tagDetection from "../../../src/tagDetection";
 
 let config1 = {
     tags: {

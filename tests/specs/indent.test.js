@@ -1,5 +1,5 @@
 import { expect} from "chai";
-import { getIndentation, getSpaceAtEnd } from "../../../dist/spaceHandlers";
+import { getIndentation, getSpaceAtEnd } from "../../../src/spaceHandlers";
 
 describe("Indentation", () => {
     it("Should count the correct number of indents (double space)", () => {
