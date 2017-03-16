@@ -18,7 +18,7 @@ index.html
 
 index.js
 ```Javascript
-import sweet_render from "sweet-render";
+import sweetRender from "sweet-render";
 let some_variable = "aaroncoding";
 
 const input = `
@@ -29,7 +29,7 @@ const input = `
 <p> Wasn't that easy?
 `
 
-sweet_render(input);
+sweetRender(input);
 ```
 
 converts into:
@@ -51,9 +51,9 @@ Renders to your page as:
 Wasn't that easy?
 
 ## Syntax
-> sweet_render(input[, config])
+> sweetRender(input[, config])
 
-Use the es6 template literal (backtick) to create a multiline string, and pass it as an argument to the sweet_render function.
+Use the es6 template literal (backtick) to create a multiline string, and pass it as an argument to the sweetRender function.
 
 Start each line with any html tag wrapped in an opening and closing element tag. By default that's "<" and ">"
 If there is no tag, it defaults to "<span>". Note that if you want to start the span content with a space, or add attributes to it, you'll need to explicitly declare "<span>" otherwise it'll conflict with the indentation.
@@ -77,7 +77,7 @@ The element tag (whatever wraps around "div", "ul", etc.) can have an opening ta
 So you can have element and attribute segments joined (default) or totally separate by overriding the defaults like this:
 
 ```Javascript
-import sweet_render from "sweet-render";
+import sweetRender from "sweet-render";
 
 const config = {
     tags: {
@@ -100,7 +100,7 @@ const input = `
     [[a]] {href="http://aaroncoding.com"} click me!
 `
 
-sweet_render(input, config);
+sweetRender(input, config);
 
 ```
 A tag can be any string. It can be identical or different from any other string. By composing them in different ways, there is room for tremendous creativity.
@@ -247,7 +247,7 @@ $$p$$ This paragraph has no attributes
 **Description**: 
 
 Contains the attribute(s). Can be almost any string, any length.
-sweet_render will start looking for the attribute open tag as soon as it sees the element close.
+sweetRender will start looking for the attribute open tag as soon as it sees the element close.
 
 ### attributes_separator
 

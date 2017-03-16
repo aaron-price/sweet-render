@@ -2,7 +2,7 @@ import blockFormat from "./blockFormat";
 import handleConfig from "./handleConfig";
 import { buildContainer, renderAll } from "./handleRendering";
 
-function sweet_render(input, custom_config = {}) {
+function sweetRender(input, custom_config = {}) {
     // Declare some variables
     const config = handleConfig(custom_config);
     let arrOfLines = input.split(/\n/ig);
@@ -24,4 +24,4 @@ function sweet_render(input, custom_config = {}) {
     renderAll(elementsArray, containerParent);
 }
 
-export default sweet_render;
+export default sweetRender;

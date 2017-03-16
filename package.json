@@ -1,6 +1,6 @@
 {
-  "name": "sweet-render",
-  "version": "1.0.0",
+  "name": "sweetRender",
+  "version": "1.0.02",
   "description": "A build-your-own-templating-engine sandbox",
   "main": "dist/index.js",
   "scripts": {
