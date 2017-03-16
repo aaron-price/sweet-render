@@ -66,7 +66,7 @@ index.html
 ```HTML
 <html>
     <head>
-        <script src="https://npmcdn.com/sweet-render/dist/index.umd.min.js"></script>
+        <script src="https://npmcdn.com/sweet-render"></script>
     </head>
     <body>
         <div class="container"></div>

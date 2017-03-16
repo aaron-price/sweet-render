@@ -1,6 +1,6 @@
 {
   "name": "sweet-render",
-  "version": "1.0.02",
+  "version": "1.0.3",
   "description": "A build-your-own-templating-engine sandbox",
   "main": "dist/index.umd.min.js",
   "scripts": {
