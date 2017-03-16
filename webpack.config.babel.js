@@ -7,7 +7,7 @@ export default {
     output: {
         path: join(__dirname, "dist"),
         libraryTarget: "umd",
-        library: "sweet-render",
+        library: "sweetRender",
     },
     devtool: "source-map",
     module: {

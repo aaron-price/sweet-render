@@ -24,4 +24,4 @@ function sweetRender(input, custom_config = {}) {
     renderAll(elementsArray, containerParent);
 }
 
-export default sweetRender;
+module.exports = { sweetRender };

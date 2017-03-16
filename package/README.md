@@ -4,82 +4,21 @@ Add it anywhere in your javascript to render html DOM elements.
 Use the default, or the powerful customization API.
 
 ## Set up:
-### Node based environment
-
-```BASH
-npm install --save sweet-render
-```
-
-In your html make an element with class container, and put your js anywhere below it.
-index.html
-```HTML
-<html>
-    <body>
-        <div class="container"></div>
-        <script src="index.js" type="text/javascript"/>
-    </body>
-</html>
-```
-
-In your script, import sweetRender from the package, and pass it an input string using a multiline template literal 
-index.js
-```Javascript
-import { sweetRender } from "sweet-render";
-let some_variable = "aaroncoding";
-
-const input = `
-<h3> Hello World!
-<ul>
-  <li>
-    <a href="http://${some_variable}.com"> Click me!
-<p> Wasn't that easy?
-`
-
-sweetRender(input);
-```
-
-It automatically converts into:
-```HTML
-<h3>Hello world</h3>
-<ul>
-  <li>
-    <a href="http://aaroncoding.com">Click Me</a>
-  </li>
-</ul>
-<p> Wasn't that easy?</p>
-```
-
-Renders to your page as:
-
-### Hello world
-* [Click me](http://aaroncoding.com)
-
-Wasn't that easy?
-
-## Set up:
-### Browser based environment
-
-In your html:
- 1. Grab the library from a CDN
- 2. Make an element with class container
- 3 Put your js anywhere below it.
- 
 index.html
 ```HTML
 <html>
     <head>
-        <script src="https://npmcdn.com/sweet-render/dist/index.umd.min.js"></script>
+        <script src="index.js" type="text/javascript"/>
     </head>
     <body>
         <div class="container"></div>
-        <script src="index.js" type="text/javascript"/>
     </body>
 </html>
 ```
 
-In your script, pass the sweetRender function an input string using a multiline template literal 
 index.js
 ```Javascript
+import sweetRender from "sweet-render";
 let some_variable = "aaroncoding";
 
 const input = `
@@ -93,7 +32,7 @@ const input = `
 sweetRender(input);
 ```
 
-It automatically converts into:
+converts into:
 ```HTML
 <h3>Hello world</h3>
 <ul>
@@ -111,29 +50,10 @@ Renders to your page as:
 
 Wasn't that easy?
 
-
 ## Syntax
 > sweetRender(input[, config])
 
-### es6
-Use the template literal (backtick) to create a multiline string.
-
-```Javascript
-const input = `
-<p> Hello world
-`
-```
-
-### pre-es6
-In older setups, concatenate multiple strings together.
-
-```Javascript
-var input = "" +
-"<p> Hello world" +
-"";
-```
-
-Pass the string as an argument to the sweetRender function.
+Use the es6 template literal (backtick) to create a multiline string, and pass it as an argument to the sweetRender function.
 
 Start each line with any html tag wrapped in an opening and closing element tag. By default that's "<" and ">"
 If there is no tag, it defaults to "<span>". Note that if you want to start the span content with a space, or add attributes to it, you'll need to explicitly declare "<span>" otherwise it'll conflict with the indentation.
@@ -145,7 +65,7 @@ Spaces after a closing element or closing attribute tag are optional.
 
 To nest elements, indent them with 2 spaces (by default).
 
-To interpolate or concatenate javascript, do it just like you normally would.
+To interpolate or concatenate javascript, do it just like you would with any other template literal string.
 
 ## Configuration
 "<"s aren't good enough for you? No problem, you can make your own templating engine! Just pass it an object as the second argument, and override some of the defaults.
@@ -183,11 +103,9 @@ const input = `
 sweetRender(input, config);
 
 ```
-
 A tag can be any string. It can be identical or different from any other string. By composing them in different ways, there is room for tremendous creativity.
 
 You can override any of these defaults:
-
 ```
 container: ".container",
 tags: {
@@ -204,10 +122,9 @@ tags: {
 attributes_separator: ", ",
 indent_str: "  "
 ```
+## Config details
 
-# Config details
-
-## container
+### container
 
 **Default**:
 
@@ -247,7 +164,7 @@ Start with either "." for class, "#" for id.
 If you use a class but don't want to target the first of it's kind, pass an array instead of a string, with the string as the first element and the nth number as the second.
 If you pass a class as a string, the nth instance parameter will default to 0.
 
-## tags.element
+### tags.element
 
 **Default**: 
 open: "<"
@@ -288,7 +205,7 @@ Contains the element type. Can be almost any string, any length.
 
 Don't open with spaces if you also indent with spaces.
 
-## tags.attribute
+### attributes_tag
 
 **Default**:
 open: ""    (blank string)
@@ -313,7 +230,7 @@ const config = {
             open: "$$",
             closeWithoutAttr: "$$",
             closeWithAttr: "!"
-        },
+        }
         attribute: {
             open: "{",
             close: "}"
