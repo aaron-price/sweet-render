@@ -48,7 +48,10 @@ const config = {
     tags: {
         element: {
             open: "[[",
-            closeWithAttr: "]]",
+            closeWithAttr: "]]",# Next step
+Now that you have your environment set up, you need to pick a format to use. 
+
+[NEXT: FORMATS >>>>](Formats.md)
             closeWithoutAttr: "]]"
         },
         attribute: {
@@ -69,3 +72,8 @@ const input = `
 sweetRender(input, config);
 
 ```
+
+# Next step
+If you find that exciting, go dive into the configuration API
+
+[NEXT: CONFIG >>>>](Config.md)

@@ -49,7 +49,15 @@ Renders to your page as:
 ### Hello world
 * [Click me](http://aaroncoding.com)
 
-Wasn't that easy?
+Wasn't that easy? 
+
+# Next step
+Now that you have your environment set up, you need to pick a format to use. 
+
+[NEXT: FORMATS >>>>](Formats.md)
+
+
+=======================
 
 
 ## Browser based environments
@@ -105,3 +113,8 @@ Renders to your page as:
 * [Click me](http://aaroncoding.com)
 
 Wasn't that easy?
+
+# Next step
+Now that you have your environment set up, you need to pick a format to use. 
+
+[NEXT: FORMATS >>>>](Formats.md)

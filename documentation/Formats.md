@@ -41,3 +41,9 @@ var input = "" +
 "<ul>\n" +
 "  <li> This is a list item!\n"
 ```
+
+# Next Step
+
+Great, you know your input options. Now time to use it
+
+[NEXT: USAGE >>>>](Usage.md)
