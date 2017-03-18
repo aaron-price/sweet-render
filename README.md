@@ -3,7 +3,22 @@
 Add it anywhere in your javascript to render html DOM elements.
 Use the default, or the powerful customization API.
 
-## Set up: Node based environment
+
+Table of contents:
+[Set up](#Set-up)
+  - [Node based environments](#Node-based-environments)
+  - [Browser based environments](#Browser-based-environments)
+  - [Accepted Formats](#Accepted-Formats)
+    - [Template literals](#Template-literal-backticks)
+    - [Arrays of strings](#Arrays-of-strings)
+    - [JSON](#JSON)
+    - [Strings](#Strings)
+Usage
+  - [Default Syntax](#Default-Syntax)
+  - [Configuration](#Configuration)
+
+## Set up
+### Node based environments
 
 ```BASH
 npm install --save sweet-render
@@ -55,7 +70,9 @@ Which renders to your page as:
 
 Wasn't that easy?
 
-## Set up: Browser based environment
+
+## Browser based environments
+
 
 In your html:
  1. Grab the library from a CDN
@@ -109,57 +126,82 @@ Which renders to your page as:
 
 Wasn't that easy?
 
+## Accepted Formats
+sweet-render is meant to be as flexible as possible, and take whatever format you give it.
 
-## Syntax
-> sweetRender(input[, config])
+### Template literal backticks
+(ES6+ only) Use the template literal (backtick) to create a multiline string.
 
-### es6
-Use the template literal (backtick) to create a multiline string.
-
-```Javascript
+```javascript
 const input = `
+
+<h1> Hello World
 <ul>
-  <li> Nested list item
-    <a href="aaroncoding.com"> click me
+  <li> This is a list item!
 `
 ```
 
-### pre-es6
-In older setups, concatenate multiple strings together, and end each line with \n
+### Arrays of strings
+```javascript
+var input = [
+    "<h1> Hello World",
+    "<ul>",
+    "  <li> This is a list item!"
+];
+```
+
+### JSON
+```json
+{
+    "input": [
+        "<h3> Hello World",
+        "<ul>",
+        "  <li> This is a list item!"
+    ]
+}
+```
+
+### Strings
+Concatenate multiple strings together, with a "\n" at the end of each line.
+
 
 ```Javascript
 var some_url = "aaroncoding";
 var input = "" +
-"<ul>\n"+
-"  <li> Nested list item\n"+
-"    <a href=\"aaroncoding.com\"> click me\n"+
-"";
+"<h1> Hello World\n" +
+"<ul>\n" +
+"  <li> This is a list item!\n"
 ```
 
-Pass the string as an argument to the sweetRender function.
 
-Start each line with any html tag wrapped in an opening and closing element tag. By default that's "<" and ">"
+## Default Syntax
+> sweetRender(input[, config])
+
+Pass a string or array of strings as an argument to the sweetRender function.
+
+Start each line with any opening html tag.
+
 If there is no tag, it defaults to "<span>". Note that if you want to start the span content with a space, or add attributes to it, you'll need to explicitly declare "<span>" otherwise it'll conflict with the indentation.
+Speaking of indentation, that's how nesting elements works. Double spaces (by default) will cause an element to become a child of whatever element appears above it with a smaller indent.
 
-To add attributes, wrap all of them in the tag as well (by default).
-Separate multiple attributes with a comma and space.
+To add attributes, wrap all of them in the ">" bracket as well (by default).
 
-Spaces after a closing element or closing attribute tag are optional.
+Separate multiple attributes with a comma followed by a space.
 
-To nest elements, indent them with 2 spaces (by default).
+Spaces after a ">" are optional.
 
-To interpolate or concatenate javascript, do it just like you normally would.
+To interpolate or concatenate javascript, do it just like you normally would. Template literals have an extra interpolation syntax: ${}
 
 ## Configuration
 "<"s aren't good enough for you? No problem, you can make your own templating engine! Just pass it an object as the second argument, and override some of the defaults.
 
-There's actually a lot more than meets the eye. 
+Almost everything is configurable. So much so, that you can design your own syntax.
 
 The element tag (whatever wraps around "div", "ul", etc.) can have an opening tag and a different closing tag depending on whether the element takes attributes.
 
 So you can have element and attribute segments joined (default) or totally separate by overriding the defaults like this:
 
-```Javascript
+```javascript
 import { sweetRender } from "sweet-render";
 
 const config = {
@@ -170,17 +212,18 @@ const config = {
             closeWithoutAttr: "]]"
         },
         attribute: {
-            open: "{",
-            close: "}",
+            open: "(-:",
+            close: ":-)",
         },
     }
 }
 
 const input = `
+[[h1]] Hello world
 [[ul]]
-  [[li]] first list item
-  [[li]]
-    [[a]] {href="http://aaroncoding.com"} click me!
+  [[li]] I am a list item
+  [[li]] Here's a link:
+    [[a]] (-:href="http://aaroncoding.com":-) click me!
 `
 
 sweetRender(input, config);

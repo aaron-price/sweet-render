@@ -5,7 +5,7 @@ import { buildContainer, renderAll } from "./handleRendering";
 function sweetRender(input, custom_config = {}) {
     // Declare some variables
     const config = handleConfig(custom_config);
-    let arrOfLines = input.split(/\n/ig);
+    let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
 
     // Build a container DOM node
     let containerParent = buildContainer(config.container);

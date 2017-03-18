@@ -3,6 +3,10 @@
 ## Versions
 This uses semantic versioning
 
+## [1.1.0]
+## Added
+Support for input Arrays.
+
 ## [1.0.3]
 ## Changed
 - Package main file now uses the minimized version.
