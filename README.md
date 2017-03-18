@@ -3,6 +3,7 @@
 Add it anywhere in your javascript to render html DOM elements.
 Use the default, or the powerful customization API.
 
+
 Table of contents:
 [Set up](#Set-up)
   - [Node based environments](#Node-based-environments)
@@ -62,7 +63,7 @@ It automatically converts into:
 <p> Wasn't that easy?</p>
 ```
 
-Renders to your page as:
+Which renders to your page as:
 
 ### Hello world
 * [Click me](http://aaroncoding.com)
@@ -71,6 +72,7 @@ Wasn't that easy?
 
 
 ## Browser based environments
+
 
 In your html:
  1. Grab the library from a CDN
@@ -81,7 +83,7 @@ index.html
 ```HTML
 <html>
     <head>
-        <script src="https://npmcdn.com/sweet-render/dist/index.umd.min.js"></script>
+        <script src="https://npmcdn.com/sweet-render"></script>
     </head>
     <body>
         <div class="container"></div>
@@ -117,7 +119,7 @@ It automatically converts into:
 <p> Wasn't that easy?</p>
 ```
 
-Renders to your page as:
+Which renders to your page as:
 
 ### Hello world
 * [Click me](http://aaroncoding.com)
@@ -132,6 +134,7 @@ sweet-render is meant to be as flexible as possible, and take whatever format yo
 
 ```javascript
 const input = `
+
 <h1> Hello World
 <ul>
   <li> This is a list item!
@@ -161,7 +164,9 @@ var input = [
 ### Strings
 Concatenate multiple strings together, with a "\n" at the end of each line.
 
+
 ```Javascript
+var some_url = "aaroncoding";
 var input = "" +
 "<h1> Hello World\n" +
 "<ul>\n" +

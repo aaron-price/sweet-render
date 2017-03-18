@@ -9,6 +9,7 @@ public/bundle.js
 public/index.css
 server.bundle.js
 dist
+package
 
 
 # misc
