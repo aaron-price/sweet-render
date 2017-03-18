@@ -120,17 +120,28 @@ Use the template literal (backtick) to create a multiline string.
 
 ```Javascript
 const input = `
-<p> Hello world
+<ul>
+  <li> This is a list item!
 `
 ```
 
 ### pre-es6
-In older setups, concatenate multiple strings together.
+In older setups, there are still options. 
+
+Option 1: Concatenate multiple strings together, with a "\n" at the end of each line.
 
 ```Javascript
 var input = "" +
-"<p> Hello world" +
-"";
+"<ul> Hello world\n" +
+"  <li> This is a list item!\n"
+```
+
+Option 2: Pass an array of string
+```javascript
+var input = [
+    "<ul>",
+    "  <li> This is a list item!"
+];
 ```
 
 Pass the string as an argument to the sweetRender function.
