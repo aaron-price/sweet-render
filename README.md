@@ -15,6 +15,6 @@ Table of contents:
     - [JSON](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#json)
     - [Strings](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#strings)
   
-  - [Usage](/documentation/Usage.md/)
+  - [Usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/)
     - [Default usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/#default-syntax)
     - [Configuration](https://github.com/aaron-price/sweet-render/blob/master/documentation/Config.md/#configuration)
