@@ -49,9 +49,12 @@ Renders to your page as:
 ### Hello world
 * [Click me](http://aaroncoding.com)
 
-Wasn't that easy? Now that you have your environment set up, you need to pick a format to use. 
+Wasn't that easy? 
 
-[NEXT: FORMATS](Formats.md)
+# Next step
+Now that you have your environment set up, you need to pick a format to use. 
+
+[NEXT: FORMATS >>>>](Formats.md)
 
 
 =======================
@@ -109,6 +112,9 @@ Renders to your page as:
 ### Hello world
 * [Click me](http://aaroncoding.com)
 
-Wasn't that easy? Now that you have your environment set up, you need to pick a format to use. 
+Wasn't that easy?
 
-[NEXT: FORMATS](Formats.md)
+# Next step
+Now that you have your environment set up, you need to pick a format to use. 
+
+[NEXT: FORMATS >>>>](Formats.md)
