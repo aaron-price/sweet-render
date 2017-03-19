@@ -1,27 +1,22 @@
 import blockFormat from "./blockFormat";
 import handleConfig from "./handleConfig";
-import { buildContainer, renderAll } from "./handleRendering";
+import { renderAll, renderReact } from "./handleRendering";
 
 function sweetRender(input, custom_config = {}) {
-    // Declare some variables
+    // Take input
     const config = handleConfig(custom_config);
     let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
 
-    // Build a container DOM node
-    let containerParent = buildContainer(config.container);
-    let container = document.createElement("span");
-    containerParent.appendChild(container);
-
-    // This will hold all other DOM nodes once they're built.
+    // Format it
     const elementsArray = [];
-
-    // Individually format each line of the text block, and add to elementsArray.
     arrOfLines.forEach((line) => {
         elementsArray.push(blockFormat(line, config));
     });
 
     // Now that the elementsArray is full of DOM node objects, render them.
-    renderAll(elementsArray, containerParent);
+    config.output === "HTML" ?
+    renderAll(elementsArray, config.container) :
+    renderReact(elementsArray, config.container, config.output);
 }
 
 module.exports = { sweetRender };

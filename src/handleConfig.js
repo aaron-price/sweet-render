@@ -15,6 +15,7 @@ export default function handleConfig(custom_config = {}) {
         attributes_separator: ", ",
         indent_str: "  ",
         container: ".container",
+        output: "HTML",
     };
 
     // Create a new empty object,

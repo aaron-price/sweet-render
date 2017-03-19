@@ -24,24 +24,25 @@ function blockFormat(value, config) {
     // Takes unformatted string, returns object with {elementType, attributes, content}
     const line = separateLineElements(str + spaceAtEnd, config);
 
-    // Create the DOM node
-    let newElement = document.createElement(line.elementType);
 
-    // Add any attributes as necessary
-    line.attributes.forEach((attr) => {
-        newElement.setAttribute(attr.property, attr.value);
-    });
-
-    // Add content as necessary
-    let newContent = document.createTextNode(line.content);
-    newElement.appendChild(newContent);
 
     // Return the DOM node.
     return {
-        element: newElement,
+        // element: newElement,
+        element: line,
         indents: indents,
     };
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
