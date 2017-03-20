@@ -1,6 +1,6 @@
 import blockFormat from "./blockFormat";
 import handleConfig from "./handleConfig";
-import { renderAll, renderReact } from "./handleRendering";
+import { renderHtml, renderReact } from "./handleRendering";
 
 function sweetRender(input, custom_config = {}) {
     // Take input
@@ -15,8 +15,8 @@ function sweetRender(input, custom_config = {}) {
 
     // Now that the elementsArray is full of DOM node objects, render them.
     config.output === "HTML" ?
-    renderAll(elementsArray, config.container) :
-    renderReact(elementsArray, config.container, config.output);
+        renderHtml(elementsArray, config.container) :
+        renderReact(elementsArray, config.container, config.output);
 }
 
 module.exports = { sweetRender };

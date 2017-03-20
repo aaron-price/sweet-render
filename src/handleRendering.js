@@ -19,7 +19,24 @@ export function findParentElement(lineNum, currentLine, elementsArray) {
     }
 }
 
-export function renderAll(elementsArray, configured_container) {
+function getChildren(elementsArray, element, index) {
+    const childObjs = [];
+    for (let i = index + 1; i < elementsArray.length; i += 1) {
+
+        // Don't worry about grandchildren, only record direct children
+        if (elementsArray[i].indents === element.indents + 1) {
+            childObjs.push(i);
+        }
+        if (elementsArray[i].indents <= element.indents) {
+            break;
+        }
+    }
+
+    return childObjs;
+
+}
+
+export function renderHtml(elementsArray, configured_container) {
     // Create the DOM nodes
     const nodeArray = [];
     elementsArray.forEach((line) => {
@@ -60,48 +77,61 @@ export function renderAll(elementsArray, configured_container) {
 }
 
 export function renderReact(elementsArray, configured_container, ReactArr) {
-/*    let React = ReactArr[0];
+    let React = ReactArr[0];
     let ReactDOM = ReactArr[1];
-
-    function formatReactComponent() {
-        let attributes = {};
-        e.attributes.forEach((attr) => {
-            attributes[attr.property] = attr.value;
-        });
-
-        React.createElement(line.elementType, attributes, line.content);
-    }
-
-    var inputReact =
-        React.createElement('div', {},
-            React.createElement('h1', {}, "Contacts"),
-            React.createElement('ul', {},
-                React.createElement('li', {},
-                    React.createElement('h2', {}, "James Nelson"),
-                    React.createElement('a', {href: 'mailto:james@jamesknelson.com'}, 'james@jamesknelson.com')
-                ),
-                React.createElement('li', {},
-                    React.createElement('h2', {}, "Joe Citizen"),
-                    React.createElement('a', {href: 'mailto:joe@example.com'}, 'joe@example.com')
-                )
-            )
-        );
-
-
     let containerParent = buildContainer(configured_container);
     let container = document.createElement("div");
     containerParent.appendChild(container);
-
-    ReactDOM.render(inputReact, container);
-
-
-    //Pseudocode
-    componentsArray = elementsArray.map((el) => {
-        return React.createElement(
-            el.elementType,
-            el.attributes,
-            el.content + el.children
-        );
+    elementsArray.splice(0, 0, {
+        element: {
+            elementType: "div",
+            attributes: [],
+            content: "",
+        },
+        indents: -1,
     });
-*/
+
+    const componentsArray = elementsArray.map((el, index) => {
+        return {
+            type: el.element.elementType,
+            attributes: el.element.attributes,
+            content: el.element.content,
+            childIndices: getChildren(elementsArray, el, index),
+            indents: el.indents,
+        };
+    });
+    const componentToRender = buildReactComponent(componentsArray, 0, React);
+    ReactDOM.render(componentToRender, container);
+
+}
+
+function buildReactComponent(componentsArray, index, React) {
+    let component = componentsArray[index];
+
+    const attributes = {};
+    if (component.attributes) {
+        component.attributes.forEach((attr) => {
+            attributes[attr.property] = attr.value;
+        });
+    }
+
+    let children = [];
+    if (component.childIndices.length > 0) {
+        component.childIndices.map((child) => {
+            children.push(buildReactComponent(componentsArray, child, React));
+        });
+    }
+
+    // must not pass content or children into "br" tags.
+    const ignore = component.type === "br";
+    if (ignore) {
+        return React.createElement("br", {});
+    }
+
+    return React.createElement(
+        component.type,
+        attributes,
+        component.content,
+        ...children
+    );
 }
