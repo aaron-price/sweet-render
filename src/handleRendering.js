@@ -76,12 +76,9 @@ export function renderHtml(elementsArray, configured_container) {
     }
 }
 
-export function renderReact(elementsArray, configured_container, ReactArr) {
-    let React = ReactArr[0];
-    let ReactDOM = ReactArr[1];
-    let containerParent = buildContainer(configured_container);
-    let container = document.createElement("div");
-    containerParent.appendChild(container);
+export function renderReact(elementsArray, configured_container, output) {
+    let React = output.format;
+
     elementsArray.splice(0, 0, {
         element: {
             elementType: "div",
@@ -101,7 +98,17 @@ export function renderReact(elementsArray, configured_container, ReactArr) {
         };
     });
     const componentToRender = buildReactComponent(componentsArray, 0, React);
-    ReactDOM.render(componentToRender, container);
+
+    if (output.render !== "default") {
+        let ReactDOM = output.render;
+        let containerParent = buildContainer(configured_container);
+        let container = document.createElement("div");
+        containerParent.appendChild(container);
+        ReactDOM.render(componentToRender, container);
+    } else {
+        return componentToRender;
+    }
+
 
 }
 

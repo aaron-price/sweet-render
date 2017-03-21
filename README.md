@@ -1,7 +1,10 @@
 # Sweet Render
 #### A build-your-own-templating-engine sandbox
-Add it anywhere in your javascript to render html DOM elements.
-Use the default, or the powerful customization API.
+
+1. Choose an input format (String, array, json)
+2. Choose an output format (HTML elements, React components)
+3. Invent your own syntax, or use a default.
+4. Automagically render.
 
 Table of contents:
 
@@ -9,11 +12,14 @@ Table of contents:
     - [Node based environments](https://github.com/aaron-price/sweet-render/blob/master/documentation/Setup.md/#node-based-environments)
     - [Browser based environments](https://github.com/aaron-price/sweet-render/blob/master/documentation/Setup.md/#browser-based-environments)
     
-  - [Syntax](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/)
+  - [Input Formats](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/)
     - [Template literals](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#template-literal-backticks)
     - [Arrays of strings](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#arrays-of-strings)
     - [JSON](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#json)
     - [Strings](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#strings)
+ 
+  - [Output Formats](https://github.com/aaron-price/sweet-render/blob/master/documentation/Output-Formats.md/)
+    - [HTML]()
   
   - [Usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/)
     - [Default usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/#default-syntax)
