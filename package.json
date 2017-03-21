@@ -21,7 +21,8 @@
     "javascript"
   ],
   "files": [
-    "dist"
+      "dist/index.umd.min.js",
+      "dist/index.umd.min.map"
   ],
   "author": "Aaron Price",
   "license": "MIT",
