@@ -1,27 +1,33 @@
 import blockFormat from "./blockFormat";
 import handleConfig from "./handleConfig";
-import { buildContainer, renderAll } from "./handleRendering";
+import { renderHtml, renderReact } from "./handleRendering";
 
 function sweetRender(input, custom_config = {}) {
-    // Declare some variables
+    // Take input.
     const config = handleConfig(custom_config);
     let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
 
-    // Build a container DOM node
-    let containerParent = buildContainer(config.container);
-    let container = document.createElement("span");
-    containerParent.appendChild(container);
-
-    // This will hold all other DOM nodes once they're built.
+    // Format it.
     const elementsArray = [];
-
-    // Individually format each line of the text block, and add to elementsArray.
     arrOfLines.forEach((line) => {
         elementsArray.push(blockFormat(line, config));
     });
 
     // Now that the elementsArray is full of DOM node objects, render them.
-    renderAll(elementsArray, containerParent);
+    // As plain HTML.
+    if (config.output.format === "HTML") { renderHtml(elementsArray, config.container); }
+
+    // As React
+    if (config.output.format !== "HTML") {
+        if (config.output.render === "default") {
+            // return the function, this package is probably being called inside a component.
+            return renderReact(elementsArray, config.container, config.output);
+        } else {
+            // execute, but don't return because ReactDOM will be rendering it somewhere specified
+            renderReact(elementsArray, config.container, config.output);
+        }
+    }
+
 }
 
 module.exports = { sweetRender };
