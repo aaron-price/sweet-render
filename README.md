@@ -20,7 +20,8 @@ Table of contents:
  
   - [Output Formats](https://github.com/aaron-price/sweet-render/blob/master/documentation/Output-Formats.md/)
     - [HTML]()
+    - [ReactJs]()
   
   - [Usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/)
-    - [Default usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/#default-syntax)
+    - [Default syntax](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/#default-syntax)
     - [Configuration](https://github.com/aaron-price/sweet-render/blob/master/documentation/Config.md/#configuration)

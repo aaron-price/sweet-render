@@ -17,7 +17,7 @@ export default function handleConfig(custom_config = {}) {
         container: ".container",
         output: {
             format: "HTML",
-            render: "default"
+            render: "default",
         },
     };
 
