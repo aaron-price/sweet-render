@@ -5,7 +5,7 @@ This is the default. No extra configuration needed, just execute the sweetRender
 
 ### ReactJs
 
-As of v1.2.0, you can render React components, allowing you to use sweetRender as a drop-in replacement for JSX. Note that it doesn't replace React itself, but merely the part in the return statement of your component.
+As of v1.2.0, you can render React components, allowing you to use sweetRender as a drop-in replacement for JSX. Note that it doesn't replace React itself, but it can replace all or part of the return statement of your component.
 
 To render React, you must pass a config argument with an output object, with both of these properties:
 
