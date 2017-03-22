@@ -31,13 +31,12 @@
 #### Lightweight
 This package has no production dependencies, and no excess bloat.
 
-Gzipped, it comes to 4kb total.
+Gzipped, it comes to 5kb total.
 
 #### Modern
-Works fine in older javascript.
-Utilizes es6+ if you do.
+Utilizes es6+ if you do, but works fine in older javascript.
 
-Can be used as an alternative to React's JSX. Invent your own syntax and use that instead.
+Can be used as an alternative to React's JSX allowing you to invent your own syntax and use that instead.
 
 #### Elegant
 Write HTML or React as if you were having a normal English conversation.
