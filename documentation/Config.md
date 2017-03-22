@@ -67,13 +67,14 @@ If you pass a class as a string, the nth instance parameter will default to 0.
 
 ## Tags
 
-**Default**: 
+**Default**:
+```
 elementOpenTag: "" (empty string)
 elementCloseTagWithAttr: " "  (single space)
 elementCloseTagWithoutAttr: "|" (pipe)
 attributeTagOpen: "" (empty string)
 attributeTagClose: "|", (pipe)
-
+```
 **Type**: string
 **Default Example**
 
