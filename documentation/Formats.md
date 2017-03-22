@@ -6,18 +6,18 @@ sweet-render is meant to be as flexible as possible, and take whatever format yo
 
 ```javascript
 const input = `
-<h1> Hello World
-<ul>
-  <li> This is a list item!
+h1| Hello World
+ul|
+  li| This is a list item!
 `
 ```
 
 ### Arrays of strings
 ```javascript
 var input = [
-    "<h1> Hello World",
-    "<ul>",
-    "  <li> This is a list item!"
+    "h1| Hello World",
+    "ul|",
+    "  li| This is a list item!"
 ];
 ```
 
@@ -25,9 +25,9 @@ var input = [
 ```json
 {
     "input": [
-        "<h3> Hello World",
-        "<ul>",
-        "  <li> This is a list item!"
+        "h3| Hello World",
+        "ul|",
+        "  li| This is a list item!"
     ]
 }
 ```
@@ -37,9 +37,9 @@ Concatenate multiple strings together, with a "\n" at the end of each line.
 
 ```Javascript
 var input = "" +
-"<h1> Hello World\n" +
-"<ul>\n" +
-"  <li> This is a list item!\n"
+"h1| Hello World\n" +
+"ul|\n" +
+"  li| This is a list item!\n"
 ```
 
 # Next Step

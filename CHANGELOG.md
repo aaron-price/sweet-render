@@ -1,13 +1,26 @@
 # Change Log
 
 ## Versions
-This uses semantic versioning
+This uses semantic versioning.
+
 ## [1.2.0]
 ## Added
-Support for React
+Support for React.
+Greatly simplified the API endpoints, getting rid of all nested objects.
+Enabled syntax presets
+Changed the default syntax to a minimalist one - see docs for details
+
+## Breaking changes
+The API endpoints are different now. For example: 
+Old:
+config = {tags: {element: {open: ""}}} 
+
+New:
+config = {elementTagOpen: ""}
 
 ## Fixed
 Issue with lists as the first element. see https://github.com/aaron-price/sweet-render/issues/8
+An issue with Object.assign only doing shallow assigning, so if you customized part of an object, you would override the whole thing.
 
 ## [1.1.0]
 ## Added

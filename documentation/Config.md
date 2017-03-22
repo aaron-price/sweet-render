@@ -3,23 +3,29 @@
 You can override any of these defaults:
 
 ```
-container: ".container",
-tags: {
-    element: {
-        open: "<",
-        closeWithAttr: " ",
-        closeWithoutAttr: ">",
-    },
-    attribute: {
-        open: "",
-        close: ">",
-    },
-},
-attributes_separator: ", ",
-indent_str: "  "
+elementOpenTag: "",
+elementCloseTagWithAttr: " ",
+elementCloseTagWithoutAttr: "|",
+
+
+attributeTagOpen: "",
+attributeTagClose: "|",
+attributesSeparator: ", ",
+
+
+indentString: "  ",
+
+
+outputContainer: ".container",
+outputFormat: "HTML",
+outputRender: "default",
+
+
+preset: "default",
+    
 ```
 
-## container
+## outputContainer
 
 **Default**:
 
@@ -31,7 +37,7 @@ string OR array
 
 **Default example**
 
-```Javascript
+```javascript
 <div></div>
 <div class="container">This is the container</div>
 <div></div>
@@ -39,15 +45,15 @@ string OR array
 
 **Customized example** 
 
-const config = {container: [".foo", 3]}
+const config = {outputContainer: [".foo", 3]}
 
-```Javascript
+````javascript
 <div class="foo"></div>
 <div class="foo"></div>
 <div class="foo"></div>
 <div class="foo">This is the container</div>
 <div class="foo"></div>
-```
+````
 
 **Description** 
 
@@ -59,92 +65,48 @@ Start with either "." for class, "#" for id.
 If you use a class but don't want to target the first of it's kind, pass an array instead of a string, with the string as the first element and the nth number as the second.
 If you pass a class as a string, the nth instance parameter will default to 0.
 
-## tags.element
+## Tags
 
 **Default**: 
-open: "<"
-closeWithAttr: " "  (single space)
-closeWithoutAttr: ">"
+elementOpenTag: "" (empty string)
+elementCloseTagWithAttr: " "  (single space)
+elementCloseTagWithoutAttr: "|" (pipe)
+attributeTagOpen: "" (empty string)
+attributeTagClose: "|", (pipe)
 
 **Type**: string
 **Default Example**
 
 ```
-<a href="www.aaroncoding.com", class="batman"> href and class are attributes
+a href="www.aaroncoding.com", class="batman"| The href and class are attributes
+p| This paragraph has no attributes
+```
+
+**Customized Example**
+
+```Javascript
+const config = {
+    elementOpenTag: "<",
+    elementCloseTagWithoutAttr: ">",
+    elementCloseTagWithAttr: ">",
+    attributeTagOpen: "{",
+    attributeTagClose: "}"
+    
+}
+
+const input = `
+<a> {href="www.aaroncoding.com", class="batman"} href and class are attributes
 <p> This paragraph has no attributes
-```
-
-**Customized Example**
-
-```Javascript
-const config = {
-    tags: {
-        element: {
-            open: "$$",
-            closeWithoutAttr: "$$"
-        }
-    }
-}
-
-const input = `
-$$a href="www.aaroncoding.com", class="batman"> href and class are attributes
-$$p$$ This paragraph has no attributes
 `
 ```
 
 **Description**: 
 
-Contains the element type. Can be almost any string, any length.
+Contains the tags for opening and closing elements and attributes. Can be almost any string, any length.
 
-**Known issues**: 
+sweetRender will start looking for the attribute open tag as soon as it sees the element close (with attributes).
 
-Don't open with spaces if you also indent with spaces.
-
-## tags.attribute
-
-**Default**:
-open: ""    (blank string)
-close: ">"
-
-**Type**: 
-
-string
-
-**Default Example**
-
-```
-<a !href="www.aaroncoding.com", class="batman"> Click me
-```
-
-**Customized Example**
-
-```Javascript
-const config = {
-    tags: {
-        element: {
-            open: "$$",
-            closeWithoutAttr: "$$",
-            closeWithAttr: "!"
-        },
-        attribute: {
-            open: "{",
-            close: "}"
-        }
-    }
-}
-
-const input = `
-$$a! {href="www.aaroncoding.com", class="batman"} href and class are attributes
-$$p$$ This paragraph has no attributes
-`
-```
-
-**Description**: 
-
-Contains the attribute(s). Can be almost any string, any length.
-sweetRender will start looking for the attribute open tag as soon as it sees the element close.
-
-## attributes_separator
+## attributesSeparator
 
 **Default**: 
 ```
@@ -159,15 +121,15 @@ string
 **Default Example**
 
 ```
-<div style="margin: auto", class="foo", href="www.aaroncoding.com">
+div style="margin: auto", class="foo", href="www.aaroncoding.com"| Hello World
 ```
 
 **Customized Example**
 
 ```Javascript
-const config = {attributes_separator: " BAM "}
+const config = {attributesSeparator: " BAM "}
 
-<div style="margin: auto" BAM class="foo" BAM href="www.aaroncoding.com">
+div style="margin: auto" BAM class="foo" BAM href="www.aaroncoding.com"| Hello World
 ```
 
 **Description**: 
@@ -179,7 +141,7 @@ When you have multiple attributes in an element, this is how you need to separat
 A single space *can* work, but you will need to be careful with spaces within a given attribute. For example inline styles with spaces
 
 
-## indent_str
+## indentString
 
 **Default**: 
 ```
@@ -192,20 +154,87 @@ A single space *can* work, but you will need to be careful with spaces within a 
 **Default example**:
 
 ```
-<div>
-  <p> Hello
+div|
+  ul|
+    li| first list item
+    li| I have a link
+      a href="http://aaroncoding.com"| here
+    li| third list item
+p| No more lists.
 ```
 
 **Customized example**
 
 ```
-const config = {indent_str: "--"}
+const config = {indentString: "-_"}
 
-<div>
---<p> Hello
+div|
+-_ul|
+-_-_li| first list item
+-_-_li| I have a link
+-_-_-_a href="http://aaroncoding.com"| here
+-_-_li| third list item
+p| No more lists.
 ```
 
 **Description**: 
 
 The string that counts as an indent. 
 Can be a different number of spaces, or different string entirely.
+
+# Presets
+
+**Description**:
+
+Override some of the default settings with one of the presets
+
+## Preset: Smiley
+
+```javascript
+const config = {preset: "smiley"}
+
+```
+
+elementOpenTag: ":-)",
+elementCloseTagWithAttr: " ",
+elementCloseTagWithoutAttr: "(-:",
+
+attributeTagOpen: "X-D",
+attributeTagClose: "8-P",
+
+## Preset: surprised
+
+```javascript
+const config = {preset: "surprised"}
+
+```
+elementOpenTag: "!",
+elementCloseTagWithAttr: "!",
+elementCloseTagWithoutAttr: "!",
+
+attributeTagOpen: "!",
+attributeTagClose: "!",
+
+## Preset: verbose
+```javascript
+const config = {preset: "verbose"}
+
+```
+elementOpenTag: "el",
+elementCloseTagWithAttr: "el",
+elementCloseTagWithoutAttr: "el",
+
+attributeTagOpen: "attr",
+attributeTagClose: "attr",
+
+## Preset: html
+```javascript
+const config = {preset: "html"}
+
+```
+elementOpenTag: "<",
+elementCloseTagWithAttr: " ",
+elementCloseTagWithoutAttr: ">",
+
+attributeTagOpen: "",
+attributeTagClose: ">",

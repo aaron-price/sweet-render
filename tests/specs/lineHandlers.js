@@ -7,59 +7,35 @@ import separateLineElements, {
 } from "../../../src/lineHandlers";
 
 let config1 = {
-    tags: {
-        element: {
-            open: "@",
-            closeWithAttr: "@",
-            closeWithoutAttr: "@"
-        },
-        attribute: {
-            open: "!",
-            close: "!",
-        },
-    }
+    elementOpenTag: "@",
+    elementCloseTagWithAttr: "@",
+    elementCloseTagWithoutAttr: "@",
+    attributeTagOpen: "!",
+    attributeTagClose: "!",
 };
 
 let config2 = {
-    tags: {
-        element: {
-            open: "<",
-            closeWithAttr: " ",
-            closeWithoutAttr: ">"
-        },
-        attribute: {
-            open: "",
-            close: ">",
-        },
-    }
+    elementOpenTag: "<",
+    elementCloseTagWithAttr: " ",
+    elementCloseTagWithoutAttr: ">",
+    attributeTagOpen: "",
+    attributeTagClose: ">",
 };
 
 let config3 = {
-    tags: {
-        element: {
-            open: "[[",
-            closeWithAttr: "]]",
-            closeWithoutAttr: "]]"
-        },
-        attribute: {
-            open: "{",
-            close: "}",
-        },
-    }
+    elementOpenTag: "[[",
+    elementCloseTagWithAttr: "]]",
+    elementCloseTagWithoutAttr: "]]",
+    attributeTagOpen: "{",
+    attributeTagClose: "}",
 };
 
 let config4 = {
-    tags: {
-        element: {
-            open: "@@",
-            closeWithAttr: "@@",
-            closeWithoutAttr: "@@"
-        },
-        attribute: {
-            open: "{",
-            close: "}",
-        },
-    }
+    elementOpenTag: "@@",
+    elementCloseTagWithAttr: "@@",
+    elementCloseTagWithoutAttr: "@@",
+    attributeTagOpen: "{",
+    attributeTagClose: "}",
 };
 
 describe("getElementString", () => {
@@ -69,8 +45,10 @@ describe("getElementString", () => {
 
     it("Should return the correct element type (with attr)", () => {
         config = config1;
+
         result = getElementString(`@p@ !class="batman"! Hello world!`, config, true);
         expect(result).to.equal("p");
+
         result = getElementString(`@p@!class="batman"! Hello world!`, config, true);
         expect(result).to.equal("p");
 
@@ -181,10 +159,6 @@ describe("getContentString", () => {
         expect(result).to.equal(` Hello world!`);
     });
 
-    /*
-    TODO test attribute array
-    It's not proving to be very testable because of the way template literals, double quotes, and babel, interact.
-    */
 });
 
 describe("separateLineHandlers", () => {

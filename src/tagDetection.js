@@ -1,19 +1,19 @@
 // Finds index of each element tag
 function indexOfElTags(str, config) {
-    const openStr = config.tags.element.open;
-    const closeWithStr = config.tags.element.closeWithAttr;
-    const closeWithoutStr = config.tags.element.closeWithoutAttr;
+    const openStr = config.elementOpenTag;
+    const closeWithStr = config.elementCloseTagWithAttr;
+    const closeWithoutStr = config.elementCloseTagWithoutAttr;
 
     return {
-        open: str.indexOf(openStr),
+        elementOpenTag: str.indexOf(openStr),
 
         // If it's the same as the opening tag, find the 2nd instance, else the 1st.
-        closeWithAttr: openStr === closeWithStr ?
+        elementCloseTagWithAttr: openStr === closeWithStr ?
             nthIndex(str, closeWithStr, 2) :
             nthIndex(str, closeWithStr, 1),
 
         // If it's the same as the opening tag, find the 2nd instance, else the 1st.
-        closeWithoutAttr: openStr === closeWithoutStr ?
+        elementCloseTagWithoutAttr: openStr === closeWithoutStr ?
             nthIndex(str, closeWithoutStr, 2) :
             nthIndex(str, closeWithoutStr, 1),
     };
@@ -27,14 +27,14 @@ function indexOfAttrTags(str, config) {
     const elTags = indexOfElTags(str, config);
 
     // Strings of tags
-    const attrOpenStr = config.tags.attribute.open;
-    const attrCloseStr = config.tags.attribute.close;
+    const attrOpenStr = config.attributeTagOpen;
+    const attrCloseStr = config.attributeTagClose;
 
     // Indices of attribute tags
-    const open = str.indexOf(attrOpenStr, elTags.closeWithAttr);
+    const open = str.indexOf(attrOpenStr, elTags.elementCloseTagWithAttr);
     const close = str.indexOf(attrCloseStr, open + 1);
 
-    return { open, close };
+    return { attributeTagOpen: open, attributeTagClose: close };
 }
 
 // Determines whether attributes exist.
@@ -42,11 +42,11 @@ function getAttributesExist(str, config) {
     // Declare some constants
     const elTags = indexOfElTags(str, config);
     const attrTags = indexOfAttrTags(str, config);
-    const openEl = elTags.open;
-    const closeElWith = elTags.closeWithAttr;
-    const closeElWithout = elTags.closeWithoutAttr;
-    const openAttr = attrTags.open;
-    const closeAttr = attrTags.close;
+    const openEl = elTags.elementOpenTag;
+    const closeElWith = elTags.elementCloseTagWithAttr;
+    const closeElWithout = elTags.elementCloseTagWithoutAttr;
+    const openAttr = attrTags.attributeTagOpen;
+    const closeAttr = attrTags.attributeTagClose;
 
     // Fixes use cases like: `<a> Foo>` Which should be false
     if (
@@ -67,7 +67,7 @@ function getAttributesExist(str, config) {
         closeElWith <= openAttr &&      // Element closes before attributes begin, or at the same time.
 
         // Attributes open no more than 2 chars after element ends
-        (2 + closeElWith + config.tags.element.closeWithAttr.length) >= openAttr
+        (2 + closeElWith + config.elementCloseTagWithAttr.length) >= openAttr
     );
 }
 
@@ -75,7 +75,7 @@ function getAttributesExist(str, config) {
 function getContentString(str, config, attributesExist) {
     const startPoint = attributesExist ?
         indexOfAttrTags(str, config).close :
-        indexOfElTags(str, config).closeWithoutAttr;
+        indexOfElTags(str, config).elementCloseTagWithoutAttr;
 
     return str.slice(startPoint);
 }

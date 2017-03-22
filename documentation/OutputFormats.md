@@ -5,16 +5,14 @@ This is the default. No extra configuration needed, just execute the sweetRender
 
 ### ReactJs
 
-As of v1.2.0, you can render React components, allowing you to use sweetRender as a drop-in replacement for JSX. Note that it doesn't replace React itself, but merely the part in the return statement of your component.
+As of v1.2.0, you can render React components, allowing you to use sweetRender as a drop-in replacement for JSX. Note that it doesn't replace React itself, but it can replace all or part of the return statement of your component.
 
 To render React, you must pass a config argument with an output object, with both of these properties:
 
 ```javascript
 const config = {
-    output: {
-        format: React,
-        render: "default",
-    }
+    outputFormat: React,
+    outputRender: "default"    
 };
 ```
 #### output.format
@@ -37,44 +35,38 @@ Using ReactDOM as the render property is not yet stable
 
 #### Input
 
-In order to pass props and state to your sweetRender syntax, you can easily put in inline... or wrap it in a function if you need to call it from outside the component.
+In order to pass props and state to your sweetRender syntax, you can easily put it inline... or wrap it in a function if you need to call it from outside the component.
  
 ```javascript
 // anonymous function
 const input = function(props) {
     return (`
-<p> Hello ${props.value}
-`
-    );
+p| Hello ${props.value}
+`);
 }
 
 // es6 arrow function
-const input = (props) => `<h1> Hello ${props.value}`
+const input = (props) => `h1| Hello ${props.value}`
 
 // Inline
 class MyComponent extends Component {
     render() {
        return sweetRender(`
-<h1> Hello ${this.props.value}
+h1| Hello ${this.props.value}
 `, config) 
     }
 }
 ```
- 
- 
-
 
 ```javascript
 import React, { Component } from "react";
 import sweetRender from "sweet-render";
 
-const input = (props) => `<h1>Hello ${props.value}`;
+const input = (props) => `h1| Hello ${props.value}`;
 
 const config = {
-    output: {
-        format: React,
-        render: "default",
-    }
+    outputFormat: React,
+    outputRender: "default"
 };
 
 // Use the sweetRender function as the return statement

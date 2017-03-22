@@ -6,6 +6,7 @@ function sweetRender(input, custom_config = {}) {
     // Take input.
     const config = handleConfig(custom_config);
     let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
+    console.dir(config);
 
     // Format it.
     const elementsArray = [];
@@ -15,16 +16,16 @@ function sweetRender(input, custom_config = {}) {
 
     // Now that the elementsArray is full of DOM node objects, render them.
     // As plain HTML.
-    if (config.output.format === "HTML") { renderHtml(elementsArray, config.container); }
+    if (config.outputFormat === "HTML") { renderHtml(elementsArray, config.outputContainer); }
 
     // As React
-    if (config.output.format !== "HTML") {
-        if (config.output.render === "default") {
+    if (config.outputFormat !== "HTML") {
+        if (config.outputRender === "default") {
             // return the function, this package is probably being called inside a component.
-            return renderReact(elementsArray, config.container, config.output);
+            return renderReact(elementsArray, config);
         } else {
             // execute, but don't return because ReactDOM will be rendering it somewhere specified
-            renderReact(elementsArray, config.container, config.output);
+            renderReact(elementsArray, config);
         }
     }
 

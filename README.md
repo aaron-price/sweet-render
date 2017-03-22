@@ -19,9 +19,9 @@
     - [JSON](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#json)
     - [Strings](https://github.com/aaron-price/sweet-render/blob/master/documentation/Formats.md/#strings)
  
-  - [Output Formats](https://github.com/aaron-price/sweet-render/blob/master/documentation/Output-Formats.md/)
-    - [HTML](https://github.com/aaron-price/sweet-render/blob/master/documentation/Output-Formats.md/#html)
-    - [ReactJs](https://github.com/aaron-price/sweet-render/blob/master/documentation/Output-Formats.md/#reactjs)
+  - [Output Formats](https://github.com/aaron-price/sweet-render/blob/master/documentation/OutputFormats.md/)
+    - [HTML](https://github.com/aaron-price/sweet-render/blob/master/documentation/OutputFormats.md/#html)
+    - [ReactJs](https://github.com/aaron-price/sweet-render/blob/master/documentation/OutputFormats.md/#reactjs)
   
   - [Usage](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/)
     - [Default syntax](https://github.com/aaron-price/sweet-render/blob/master/documentation/Usage.md/#default-syntax)
@@ -30,10 +30,22 @@
 ## General bragging
 #### Lightweight
 This package has no production dependencies, and no excess bloat.
-gzipped, it comes to 4kb total.
+
+Gzipped, it comes to 4kb total.
 
 #### Modern
 Works fine in older javascript.
 Utilizes es6+ if you do.
 
 Can be used as an alternative to React's JSX. Invent your own syntax and use that instead.
+
+#### Elegant
+Write HTML or React as if you were having a normal English conversation.
+
+```
+h1| Hello ${name_variable},
+ul|
+  li|
+    a href="http://aaroncoding.com"| Click me
+
+```
