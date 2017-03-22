@@ -18,7 +18,7 @@ export default function separateLineElements(str, config) {
     const attributesArray = attributesExist ?
         getAttributesArray(
             attributesString,
-            config.attributes_separator
+            config.attributesSeparator
         ) : [];
 
     return {
@@ -30,32 +30,32 @@ export default function separateLineElements(str, config) {
 
 export function getElementString(str, config, attributesExist) {
     const elIndices = indexOfElTags(str, config);
-    const openIndex = elIndices.open;
-    const closeIndex = attributesExist ? elIndices.closeWithAttr : elIndices.closeWithoutAttr;
+    const openIndex = elIndices.elementOpenTag;
+    const closeIndex = attributesExist ? elIndices.elementCloseTagWithAttr : elIndices.elementCloseTagWithoutAttr;
 
     // Validate that both tags do exist
     if (openIndex === -1 || closeIndex === -1) { return null; }
 
-    return str.slice(openIndex + config.tags.element.open.length, closeIndex);
+    return str.slice(openIndex + config.elementOpenTag.length, closeIndex);
 }
 
 export function getAttributesString(str, config) {
     const AttrIndices = indexOfAttrTags(str, config);
-    const openIndex = AttrIndices.open;
-    const closeIndex = AttrIndices.close;
+    const openIndex = AttrIndices.attributeTagOpen;
+    const closeIndex = AttrIndices.attributeTagClose;
 
     // Return the string after trimming off any whitespace
     return str
         .slice(
-            openIndex + config.tags.attribute.open.length,
+            openIndex + config.attributeTagOpen.length,
             closeIndex)
         .trim();
 }
 
 export function getContentString(str, config, attributesExist) {
     const startPoint = attributesExist ?
-        indexOfAttrTags(str, config).close + config.tags.attribute.close.length :
-        indexOfElTags(str, config).closeWithoutAttr + config.tags.element.closeWithoutAttr.length;
+        indexOfAttrTags(str, config).attributeTagClose + config.attributeTagClose.length :
+        indexOfElTags(str, config).elementCloseTagWithoutAttr + config.elementCloseTagWithoutAttr.length;
 
     return str.slice(startPoint);
 }

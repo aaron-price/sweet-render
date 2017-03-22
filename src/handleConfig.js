@@ -1,24 +1,19 @@
 export default function handleConfig(custom_config = {}) {
     // Get a config object with default values unless overridden by custom values.
     const default_config = {
-        tags: {
-            element: {
-                open: "<",
-                closeWithAttr: " ",
-                closeWithoutAttr: ">",
-            },
-            attribute: {
-                open: "",
-                close: ">",
-            },
-        },
-        attributes_separator: ", ",
-        indent_str: "  ",
-        container: ".container",
-        output: {
-            format: "HTML",
-            render: "default",
-        },
+        elementOpenTag: "<",
+        elementCloseTagWithAttr: " ",
+        elementCloseTagWithoutAttr: ">",
+
+        attributeTagOpen: "",
+        attributeTagClose: ">",
+        attributesSeparator: ", ",
+
+        indentString: "  ",
+
+        outputContainer: ".container",
+        outputFormat: "HTML",
+        outputRender: "default",
     };
 
     // Create a new empty object,

@@ -76,8 +76,8 @@ export function renderHtml(elementsArray, configured_container) {
     }
 }
 
-export function renderReact(elementsArray, configured_container, output) {
-    let React = output.format;
+export function renderReact(elementsArray, config) {
+    let React = config.outputFormat;
 
     elementsArray.splice(0, 0, {
         element: {
@@ -97,18 +97,17 @@ export function renderReact(elementsArray, configured_container, output) {
             indents: el.indents,
         };
     });
-    const componentToRender = buildReactComponent(componentsArray, 0, React);
 
-    if (output.render !== "default") {
-        let ReactDOM = output.render;
-        let containerParent = buildContainer(configured_container);
+    const componentToRender = buildReactComponent(componentsArray, 0, React);
+    if (config.outputRender !== "default") {
+        let ReactDOM = config.outputRender;
+        let containerParent = buildContainer(config.outputContainer);
         let container = document.createElement("div");
         containerParent.appendChild(container);
         ReactDOM.render(componentToRender, container);
     } else {
         return componentToRender;
     }
-
 
 }
 
