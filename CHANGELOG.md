@@ -1,7 +1,8 @@
 # Change Log
 
 ## Versions
-This uses semantic versioning
+This uses semantic versioning.
+
 ## [1.2.0]
 ## Added
 Support for React.
@@ -19,6 +20,7 @@ config = {elementTagOpen: ""}
 
 ## Fixed
 Issue with lists as the first element. see https://github.com/aaron-price/sweet-render/issues/8
+An issue with Object.assign only doing shallow assigning, so if you customized part of an object, you would override the whole thing.
 
 ## [1.1.0]
 ## Added
