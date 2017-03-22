@@ -6,6 +6,7 @@ function sweetRender(input, custom_config = {}) {
     // Take input.
     const config = handleConfig(custom_config);
     let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
+    console.dir(config);
 
     // Format it.
     const elementsArray = [];

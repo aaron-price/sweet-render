@@ -23,11 +23,11 @@ import { sweetRender } from "sweet-render";
 let some_variable = "aaroncoding";
 
 const input = `
-<h3> Hello World!
-<ul>
-  <li>
-    <a href="http://${some_variable}.com"> Click me!
-<p> Wasn't that easy?
+h3| Hello World!
+ul|
+  li|
+    a href="http://${some_variable}.com"| Click me!
+p| Wasn't that easy?
 `
 
 sweetRender(input);
@@ -86,14 +86,15 @@ index.js
 let some_variable = "aaroncoding";
 
 const input = `
-<h3> Hello World!
-<ul>
-  <li>
-    <a href="http://${some_variable}.com"> Click me!
-<p> Wasn't that easy?
+h3| Hello World!
+ul|
+  li|
+    a href="http://${some_variable}.com"| Click me!
+p| Wasn't that easy?
 `;
 
 sweetRender.sweetRender(input);
+
 ```
 
 It automatically converts into:

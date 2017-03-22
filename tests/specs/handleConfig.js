@@ -59,13 +59,13 @@ describe("handleConfig", () => {
             outputContainer: ".container",
         });
         expect(result).to.contain({
-            elementOpenTag: "<",
+            elementOpenTag: "",
             elementCloseTagWithAttr: " ",
-            elementCloseTagWithoutAttr: ">",
+            elementCloseTagWithoutAttr: "|",
         });
         expect(result).to.contain({
             attributeTagOpen: "",
-            attributeTagClose: ">",
+            attributeTagClose: "|",
         });
     });
 

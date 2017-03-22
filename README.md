@@ -38,3 +38,14 @@ Works fine in older javascript.
 Utilizes es6+ if you do.
 
 Can be used as an alternative to React's JSX. Invent your own syntax and use that instead.
+
+#### Elegant
+Write HTML or React as if you were having a normal English conversation.
+
+```
+h1| Hello ${name_variable},
+ul|
+  li|
+    a href="http://aaroncoding.com"| Click me
+
+```

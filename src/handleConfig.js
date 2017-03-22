@@ -1,12 +1,12 @@
 export default function handleConfig(custom_config = {}) {
     // Get a config object with default values unless overridden by custom values.
     const default_config = {
-        elementOpenTag: "<",
+        elementOpenTag: "",
         elementCloseTagWithAttr: " ",
-        elementCloseTagWithoutAttr: ">",
+        elementCloseTagWithoutAttr: "|",
 
         attributeTagOpen: "",
-        attributeTagClose: ">",
+        attributeTagClose: "|",
         attributesSeparator: ", ",
 
         indentString: "  ",
@@ -14,41 +14,47 @@ export default function handleConfig(custom_config = {}) {
         outputContainer: ".container",
         outputFormat: "HTML",
         outputRender: "default",
+
+        preset: "default",
     };
+
+    let preset = {};
+
+    if (custom_config.preset === "smiley") { preset = preset_smiley; }
+    if (custom_config.preset === "surprised") { preset = preset_surprised; }
+    if (custom_config.preset === "verbose") { preset = preset_verbose; }
+
+
 
     // Create a new empty object,
     // assign the defaults to it,
     // and overide them with custom settings
-    return Object.assign({}, default_config, custom_config);
+    return Object.assign({}, default_config, preset, custom_config);
 }
 
-/*
-@TODO migrate to this
-const default_config = {
-    Syntax: {
-        indent_str: "  ",
-        element: {
-             open: "<",
-             closeWithAttr: " ",
-             closeWithoutAttr: ">",
-         },
-         attribute: {
-             open: "",
-             close: ">",
-             attributes_separator: ", ",
-         },
-         content: {
-             open: previousClose(),
-             close: "\n"
-         }
-     },
-    output: {
-        format: "HTML",
-        render: "default",
-        container: ".container",
-    },
-    preset: "default"
+const preset_smiley = {
+    elementOpenTag: ":-)",
+    elementCloseTagWithAttr: " ",
+    elementCloseTagWithoutAttr: "(-:",
+
+    attributeTagOpen: "X-D",
+    attributeTagClose: "8-P",
 };
 
- Add a few default syntaxes. default (lazy html), minimalist, happyface, rocket ships. That sort of thing.
-*/
+const preset_surprised = {
+    elementOpenTag: "!",
+    elementCloseTagWithAttr: "!",
+    elementCloseTagWithoutAttr: "!",
+
+    attributeTagOpen: "!",
+    attributeTagClose: "!",
+};
+
+const preset_verbose = {
+    elementOpenTag: "el",
+    elementCloseTagWithAttr: "el",
+    elementCloseTagWithoutAttr: "el",
+
+    attributeTagOpen: "attr",
+    attributeTagClose: "attr",
+};
