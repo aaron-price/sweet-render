@@ -3,7 +3,7 @@
 ## Versions
 This uses semantic versioning.
 
-## [1.2.0]
+## [2.0.0]
 ## Added
 Support for React.
 Greatly simplified the API endpoints, getting rid of all nested objects.
@@ -24,7 +24,7 @@ An issue with Object.assign only doing shallow assigning, so if you customized p
 
 ## [1.1.0]
 ## Added
-Support for input Arrays.
+Support for input Arrays/Json.
 
 ## [1.0.3]
 ## Changed

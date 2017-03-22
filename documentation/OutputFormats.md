@@ -1,7 +1,7 @@
 # Output Formats
 
 ### HTML
-This is the default. No extra configuration needed, just execute the sweetRender function and it will render it as HTML inside the first element with class "container". So make sure you have an existing element with class container, or []configure it to find a different container](Config.md/#container).
+This is the default. No extra configuration needed, just execute the sweetRender function and it will render it as HTML inside the first element with class "container". So make sure you have an existing element with class container, or [configure it to find a different container](Config.md/#container).
 
 ### ReactJs
 
@@ -15,14 +15,14 @@ const config = {
     outputRender: "default"    
 };
 ```
-#### output.format
+#### outputFormat
 
 This is not a string, it's passing in the actual React object you normally use. 
 You will need to import React yourself, this is one thing that allows sweet-render to have no production dependencies, and therefore a very small footprint in your app.
 
 It should work in any version of React you pass it.
 
-#### output.render
+#### outputRender
 
 It's recommended that you use "default" and just call sweetRender inside the return statement of your component. 
 That way it will be rendered seamlessly with the rest of the component.

@@ -195,17 +195,29 @@ const config = {preset: "smiley"}
 
 ```
 
+
+```
 elementOpenTag: ":-)",
 elementCloseTagWithAttr: " ",
 elementCloseTagWithoutAttr: "(-:",
 
 attributeTagOpen: "X-D",
 attributeTagClose: "8-P",
+```
+example
+```
+:-)a href="www.aaroncoding.com", class="batman"8-P The href and class are attributes
+:-)p(-: This paragraph has no attributes
+```
+
+
 
 ## Preset: surprised
 
 ```javascript
 const config = {preset: "surprised"}
+
+```
 
 ```
 elementOpenTag: "!",
@@ -214,10 +226,19 @@ elementCloseTagWithoutAttr: "!",
 
 attributeTagOpen: "!",
 attributeTagClose: "!",
+```
+example
+```
+!a! !href="www.aaroncoding.com", class="batman"! The href and class are attributes
+!p! This paragraph has no attributes
+```
+
 
 ## Preset: verbose
 ```javascript
 const config = {preset: "verbose"}
+
+```
 
 ```
 elementOpenTag: "el",
@@ -226,10 +247,19 @@ elementCloseTagWithoutAttr: "el",
 
 attributeTagOpen: "attr",
 attributeTagClose: "attr",
+```
+example
+```
+el a el attr href="www.aaroncoding.com", class="batman" attr The href and class are attributes
+el p el This paragraph has no attributes
+```
+
 
 ## Preset: html
 ```javascript
 const config = {preset: "html"}
+
+```
 
 ```
 elementOpenTag: "<",
@@ -238,3 +268,9 @@ elementCloseTagWithoutAttr: ">",
 
 attributeTagOpen: "",
 attributeTagClose: ">",
+```
+example
+```
+<a href="www.aaroncoding.com", class="batman"> The href and class are attributes
+<p> This paragraph has no attributes
+```
