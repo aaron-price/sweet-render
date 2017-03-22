@@ -226,3 +226,15 @@ elementCloseTagWithoutAttr: "el",
 
 attributeTagOpen: "attr",
 attributeTagClose: "attr",
+
+## Preset: html
+```javascript
+const config = {preset: "html"}
+
+```
+elementOpenTag: "<",
+elementCloseTagWithAttr: " ",
+elementCloseTagWithoutAttr: ">",
+
+attributeTagOpen: "",
+attributeTagClose: ">",

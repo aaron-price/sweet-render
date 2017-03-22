@@ -20,6 +20,7 @@ export default function handleConfig(custom_config = {}) {
 
     let preset = {};
 
+    if (custom_config.preset === "html") { preset = preset_html; }
     if (custom_config.preset === "smiley") { preset = preset_smiley; }
     if (custom_config.preset === "surprised") { preset = preset_surprised; }
     if (custom_config.preset === "verbose") { preset = preset_verbose; }
@@ -31,6 +32,15 @@ export default function handleConfig(custom_config = {}) {
     // and overide them with custom settings
     return Object.assign({}, default_config, preset, custom_config);
 }
+
+const preset_html = {
+    elementOpenTag: "<",
+    elementCloseTagWithAttr: " ",
+    elementCloseTagWithoutAttr: ">",
+
+    attributeTagOpen: "",
+    attributeTagClose: ">",
+};
 
 const preset_smiley = {
     elementOpenTag: ":-)",
