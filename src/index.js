@@ -6,15 +6,14 @@ function sweetRender(input, custom_config = {}) {
     // Take input.
     const config = handleConfig(custom_config);
     let arrOfLines = Array.isArray(input) ? input : input.split(/\n/ig);
-    console.dir(config);
 
-    // Format it.
+    // Format input as array of data objects
     const elementsArray = [];
     arrOfLines.forEach((line) => {
         elementsArray.push(blockFormat(line, config));
     });
 
-    // Now that the elementsArray is full of DOM node objects, render them.
+    // Now that the elementsArray is full of well-organized data objects, render them.
     // As plain HTML.
     if (config.outputFormat === "HTML") { renderHtml(elementsArray, config.outputContainer); }
 
