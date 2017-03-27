@@ -3,6 +3,13 @@
 ## Versions
 This uses semantic versioning.
 
+## [2.0.1]
+## Removed
+- A stray console.dir statement
+
+## Changed
+- Docs for React. It should make a bit more sense now. 
+
 ## [2.0.0]
 ## Added
 Support for React.
